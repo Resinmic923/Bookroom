@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Airbnb-like Room Booking System</title>
+<style>
+    /* CSS for styling */
+    /* Style your page as per your requirements */
+</style>
+</head>
+<body>
+    <div id="roomList">
+        <!-- Room listings will be dynamically added here -->
+    </div>
+    <div id="bookingForm" style="display:none;">
+        <h2>Book Room</h2>
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="email" id="email" placeholder="Your Email">
+        <input type="date" id="checkInDate">
+        <input type="date" id="checkOutDate">
+        <button onclick="bookRoom()">Book Now</button>
+    </div>
+
+    <script>
+        // Sample room data (replace with your own data)
+        const rooms = [
+            { id: 1, name: "Room 1", price: 50 },
+            { id: 2, name: "Room 2", price: 70 },
+            { id: 3, name: "Room 3", price: 90 }
+        ];
+
+        // Function to display room listings
+        function displayRoomListings() {
+            const roomList = document.getElementById('roomList');
+            roomList.innerHTML = '';
+            rooms.forEach(room => {
+                const roomElement = document.createElement('div');
+                roomElement.innerHTML = `
+                    <h3>${room.name}</h3>
+                    <p>Price: $${room.price} per night</p>
+                    <button onclick="showBookingForm(${room.id})">Book Now</button>
+                `;
+                roomList.appendChild(roomElement);
+            });
+        }
+
+        // Function to display booking form
+        function showBookingForm(roomId) {
+            document.getElementById('bookingForm').style.display = 'block';
+            document.getElementById('roomId').value = roomId;
+        }
+
+        // Function to book a room
+        function bookRoom() {
+            const roomId = document.getElementById('roomId').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const checkInDate = document.getElementById('checkInDate').value;
+            const checkOutDate = document.getElementById('checkOutDate').value;
+
+            // Perform booking (can be sending data to server or any other action)
+            console.log("Room booked:", { roomId, name, email, checkInDate, checkOutDate });
+
+            // Hide booking form after booking
+            document.getElementById('bookingForm').style.display = 'none';
+
+            // Optionally, you can display a confirmation message or redirect to a thank you page
+        }
+
+        // Initial display of room listings
+        displayRoomListings();
+    </script>
+</body>
+</html>
